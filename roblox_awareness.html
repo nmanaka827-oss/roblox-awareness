@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roblox – 特別キャンペーン</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Builder Sans', 'Arial', sans-serif;
+      background: #1a1a1a;
+      color: #fff;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: #1a1a1a;
+      border-bottom: 1px solid #2e2e2e;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      height: 56px;
+      gap: 32px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav .logo img {
+      height: 28px;
+      display: block;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    nav .nav-links a:hover { color: #fff; }
+
+    nav .nav-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    nav .robux-balance {
+      background: #2e2e2e;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    nav .robux-balance img { height: 16px; }
+
+    nav .btn-nav {
+      background: #00b06f;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 7px 16px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* ── HERO BANNER ── */
+    .hero-banner {
+      position: relative;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a0a2e 50%, #0d1a3a 100%);
+      overflow: hidden;
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255,68,0,0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 80% 100%, rgba(0,100,255,0.15) 0%, transparent 70%);
+    }
+
+    .official-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,176,111,0.15);
+      border: 1px solid #00b06f;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      color: #00e090;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .official-badge::before { content: '✔'; }
+
+    .hero-banner h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .hero-banner h1 .highlight {
+      background: linear-gradient(90deg, #ff4400, #ff9500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-banner .sub {
+      font-size: 1.05rem;
+      color: #aaa;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .hero-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .robux-card {
+      background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+      border: 1px solid #3a3a3a;
+      border-radius: 16px;
+      padding: 24px 36px;
+      text-align: center;
+      min-width: 200px;
+    }
+
+    .robux-card .r-icon { font-size: 3rem; }
+
+    .robux-card .amount {
+      font-size: 2.4rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ffd700, #ff9500);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .robux-card .label {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .robux-value {
+      background: #1e1e1e;
+      border: 1px solid #2e2e2e;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 0.85rem;
+      color: #999;
+      text-align: left;
+    }
+
+    .robux-value strong { color: #fff; font-size: 1rem; display: block; margin-bottom: 2px; }
+
+    /* ── TIMER ── */
+    .timer-section {
+      background: #111;
+      border-top: 1px solid #2e2e2e;
+      border-bottom: 1px solid #2e2e2e;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .timer-section .label { font-size: 0.85rem; color: #888; }
+
+    .timer { display: flex; align-items: center; gap: 8px; }
+
+    .t-box {
+      background: #ff4400;
+      border-radius: 6px;
+      padding: 6px 10px;
+      min-width: 44px;
+      text-align: center;
+    }
+
+    .t-box .n { font-size: 1.3rem; font-weight: 900; }
+    .t-box .l { font-size: 0.6rem; color: rgba(255,255,255,0.7); }
+
+    .t-sep { font-size: 1.4rem; font-weight: bold; color: #ff4400; }
+
+    .slots-left {
+      background: rgba(255,68,0,0.15);
+      border: 1px solid #ff4400;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 0.8rem;
+      color: #ff7755;
+    }
+
+    /* ── GAME SHOWCASE ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .section-header h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .section-header .see-all {
+      font-size: 0.85rem;
+      color: #0073e6;
+      cursor: pointer;
+      margin-left: auto;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .game-card {
+      background: #1e1e1e;
+      border-radius: 10px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .game-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .game-card .thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #2a2a2a;
+      display: block;
+      object-fit: cover;
+    }
+
+    .game-card .thumb-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .game-card .info {
+      padding: 10px 12px;
+    }
+
+    .game-card .game-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .game-card .players {
+      font-size: 0.78rem;
+      color: #888;
+      margin-top: 3px;
+    }
+
+    .game-card .promo-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: #ff4400;
+      color: white;
+      font-size: 0.68rem;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* ── STEPS ── */
+    .steps-section {
+      background: #111;
+      border-top: 1px solid #2e2e2e;
+    }
+
+    .steps-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .steps-inner h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .steps-inner .desc {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 32px;
+    }
+
+    .steps-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .step-card {
+      background: #1e1e1e;
+      border: 1px solid #2e2e2e;
+      border-radius: 12px;
+      padding: 24px 20px;
+      flex: 1;
+      min-width: 180px;
+      max-width: 220px;
+      text-align: center;
+    }
+
+    .step-card .num {
+      width: 40px;
+      height: 40px;
+      background: #ff4400;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.1rem;
+      margin: 0 auto 12px;
+    }
+
+    .step-card h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; }
+    .step-card p  { font-size: 0.8rem; color: #888; line-height: 1.5; }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      padding: 48px 24px 60px;
+    }
+
+    .cta-section p {
+      color: #888;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .claim-btn {
+      background: linear-gradient(90deg, #ff4400, #ff7000);
+      color: white;
+      font-size: 1.15rem;
+      font-weight: 900;
+      border: none;
+      border-radius: 8px;
+      padding: 18px 56px;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 24px rgba(255,68,0,0.45);
+      transition: transform 0.1s, box-shadow 0.1s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .claim-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(255,68,0,0.55);
+    }
+
+    .claim-btn .r-icon { font-size: 1.4rem; }
+
+    .trust-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .trust-item .dot { color: #00b06f; font-size: 1rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111;
+      border-top: 1px solid #2e2e2e;
+      padding: 24px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: #555;
+    }
+
+    footer img { height: 18px; opacity: 0.4; margin-bottom: 8px; display: block; margin: 0 auto 8px; }
+
+    /* ── WARNING MODAL ── */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .overlay.active { display: flex; }
+
+    .warn-box {
+      background: #fff;
+      color: #1a1a1a;
+      border-radius: 16px;
+      max-width: 520px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+      animation: popIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.75); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
+    }
+
+    .warn-head {
+      background: linear-gradient(90deg, #c0392b, #e74c3c);
+      color: white;
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .warn-head .wi { font-size: 2.8rem; line-height: 1; flex-shrink: 0; }
+
+    .warn-head h2 { font-size: 1.25rem; font-weight: 900; }
+    .warn-head .sub { font-size: 0.8rem; opacity: 0.85; margin-top: 3px; }
+
+    .warn-body { padding: 24px; }
+
+    .warn-body .lead {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #c0392b;
+      margin-bottom: 14px;
+    }
+
+    .point {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-bottom: 12px;
+      font-size: 0.87rem;
+      color: #333;
+      line-height: 1.55;
+    }
+
+    .point .pi { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+
+    .tip {
+      background: #fff8e1;
+      border-left: 4px solid #f39c12;
+      border-radius: 0 8px 8px 0;
+      padding: 12px 14px;
+      margin-top: 14px;
+      font-size: 0.83rem;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .tip strong { color: #1a1a1a; }
+
+    .warn-foot {
+      padding: 16px 24px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-ok {
+      background: #27ae60;
+      color: white;
+      font-weight: 800;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      cursor: pointer;
+    }
+
+    .btn-ok:hover { background: #219a52; }
+
+    .btn-cl {
+      background: #f0f0f0;
+      color: #555;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .btn-cl:hover { background: #ddd; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav .nav-links { display: none; }
+      .hero-banner { padding: 40px 20px; }
+      .games-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#" onclick="return false;">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Roblox_Logo_White.svg/320px-Roblox_Logo_White.svg.png"
+         alt="Roblox"
+         onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'ROBLOX',style:'font-weight:900;font-size:1.3rem;color:white;letter-spacing:1px'}))">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="return false;">ディスカバー</a></li>
+    <li><a href="#" onclick="return false;">アバター</a></li>
+    <li><a href="#" onclick="return false;">クリエイター</a></li>
+    <li><a href="#" onclick="return false;">Robux</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="robux-balance">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Robux_2019_Logo_gold.svg/240px-Robux_2019_Logo_gold.svg.png"
+           onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'R$'}))">
+      <span id="balanceNum">0</span>
+    </div>
+    <button class="btn-nav">ログイン</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero-banner">
+  <div class="official-badge">公式キャンペーン 2026</div>
+  <h1>
+    <span class="highlight">10,000 Robux</span><br>
+    無料プレゼントキャンペーン
+  </h1>
+  <p class="sub">Roblox 20周年を記念した特別オファー。あなたのアカウントが対象に選ばれました。</p>
+
+  <div class="hero-center">
+    <div class="robux-card">
+      <div class="r-icon">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Robux_2019_Logo_gold.svg/240px-Robux_2019_Logo_gold.svg.png"
+             style="height:56px;"
+             onerror="this.replaceWith(Object.assign(document.createElement('span'),{textContent:'💎',style:'font-size:3rem'}))">
+      </div>
+      <div class="amount">10,000</div>
+      <div class="label">Robux（無料）</div>
+    </div>
+    <div class="robux-value">
+      <strong>≒ ¥14,000相当</strong>
+      全ゲームで使える公式通貨
+      <div style="margin-top:8px;color:#00b06f;font-size:0.8rem;">✔ アカウント認証後すぐ付与</div>
+    </div>
+  </div>
+</div>
+
+<!-- TIMER -->
+<div class="timer-section">
+  <span class="label">⏰ キャンペーン終了まで</span>
+  <div class="timer">
+    <div class="t-box"><div class="n" id="h">02</div><div class="l">時間</div></div>
+    <div class="t-sep">:</div>
+    <div class="t-box"><div class="n" id="m">47</div><div class="l">分</div></div>
+    <div class="t-sep">:</div>
+    <div class="t-box"><div class="n" id="s">33</div><div class="l">秒</div></div>
+  </div>
+  <div class="slots-left">残り受取可能：<strong>3</strong>名</div>
+</div>
+
+<!-- GAME SHOWCASE -->
+<div class="section">
+  <div class="section-header">
+    <h2>🎮 対象の人気ゲーム</h2>
+    <span class="see-all">すべて見る →</span>
+  </div>
+  <div class="games-grid" id="gamesGrid">
+    <!-- JS でサムネイルを動的に挿入 -->
+  </div>
+</div>
+
+<!-- STEPS -->
+<div class="steps-section">
+  <div class="steps-inner">
+    <h2>受け取り方法</h2>
+    <p class="desc">かんたん3ステップで完了します</p>
+    <div class="steps-row">
+      <div class="step-card">
+        <div class="num">1</div>
+        <h3>ボタンをクリック</h3>
+        <p>下のボタンから公式キャンペーンページへ進む</p>
+      </div>
+      <div class="step-card">
+        <div class="num">2</div>
+        <h3>アカウント認証</h3>
+        <p>Robloxアカウントにログインして本人確認</p>
+      </div>
+      <div class="step-card">
+        <div class="num">3</div>
+        <h3>Robux受け取り</h3>
+        <p>認証後24時間以内にRobuxが自動付与される</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <p>キャンペーンの残り枠が少なくなっています。今すぐ受け取りましょう。</p>
+  <button class="claim-btn" onclick="showWarning()">
+    <span class="r-icon">💎</span>
+    10,000 Robux を今すぐ受け取る
+  </button>
+  <div class="trust-row">
+    <span class="trust-item"><span class="dot">●</span> Roblox 公式認定</span>
+    <span class="trust-item"><span class="dot">●</span> SSL 暗号化通信</span>
+    <span class="trust-item"><span class="dot">●</span> 個人情報保護対応</span>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Roblox_Logo_White.svg/320px-Roblox_Logo_White.svg.png"
+       alt="Roblox"
+       onerror="this.style.display='none'">
+  © 2026 Roblox Corporation. All Rights Reserved.<br>
+  <span style="color:#444;">Roblox, the Roblox logo and Powering Imagination are among our registered and unregistered trademarks in the U.S. and other countries.</span>
+</footer>
+
+<!-- WARNING MODAL -->
+<div class="overlay" id="overlay">
+  <div class="warn-box">
+    <div class="warn-head">
+      <div class="wi">⚠️</div>
+      <div>
+        <h2>これはフィッシング詐欺のデモです！</h2>
+        <div class="sub">セキュリティ啓発目的で作成されたページです</div>
+      </div>
+    </div>
+    <div class="warn-body">
+      <p class="lead">今あなたが見ていたページは「詐欺サイト」を再現したものです。</p>
+
+      <div class="point">
+        <span class="pi">🔴</span>
+        <span><strong>無料 Robux は絶対に存在しません。</strong>Roblox公式が無料で大量のRobuxを配布することはありません。「プレゼント」と書かれていたら100%詐欺です。</span>
+      </div>
+      <div class="point">
+        <span class="pi">🔴</span>
+        <span><strong>偽のロゴ・本物そっくりのデザインに騙されない。</strong>詐欺サイトは公式ロゴや配色をそのままコピーして本物に見せかけます。</span>
+      </div>
+      <div class="point">
+        <span class="pi">🔴</span>
+        <span><strong>カウントダウン・「残り3名」は演出。</strong>焦りを意図的に作り出し、冷静な判断を奪うための手口です。</span>
+      </div>
+      <div class="point">
+        <span class="pi">🔴</span>
+        <span><strong>ログインページに誘導するのが狙い。</strong>「アカウント認証」と称してIDとパスワードを盗み、アカウントを乗っ取ります。</span>
+      </div>
+      <div class="point">
+        <span class="pi">🔴</span>
+        <span><strong>URLを必ず確認する。</strong>本物のRobloxは <strong>roblox.com</strong> のみ。似たドメイン（roblox-free.com など）は全て偽物です。</span>
+      </div>
+
+      <div class="tip">
+        <strong>💡 覚えておこう</strong><br>
+        「無料でもらえる」「急いで！」「あなたが選ばれた」→ すべて詐欺のサインです。
+        不審なページは閉じて、必ず公式サイト <strong>www.roblox.com</strong> にアクセスしましょう。
+        保護者の方へ：お子さんとこのデモについて話し合ってみてください。
+      </div>
+    </div>
+    <div class="warn-foot">
+      <button class="btn-ok" onclick="closeWarning()">✅ わかった！詐欺の手口を覚えた</button>
+      <button class="btn-cl" onclick="closeWarning()">閉じる</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  /* ── カウントダウン ── */
+  let total = 2 * 3600 + 47 * 60 + 33;
+  setInterval(() => {
+    if (total <= 0) return;
+    total--;
+    document.getElementById('h').textContent = String(Math.floor(total / 3600)).padStart(2, '0');
+    document.getElementById('m').textContent = String(Math.floor((total % 3600) / 60)).padStart(2, '0');
+    document.getElementById('s').textContent = String(total % 60).padStart(2, '0');
+  }, 1000);
+
+  /* ── 残高アニメーション ── */
+  let bal = 0;
+  const balEl = document.getElementById('balanceNum');
+  const balInc = setInterval(() => {
+    bal += Math.floor(Math.random() * 80 + 20);
+    if (bal >= 2450) { bal = 2450; clearInterval(balInc); }
+    balEl.textContent = bal.toLocaleString();
+  }, 60);
+
+  /* ── Roblox API からゲームサムネイルを取得 ── */
+  const GAMES = [
+    { id: 920587237,  name: "Adopt Me!",         players: "89,000+" },
+    { id: 2753915549, name: "Blox Fruits",        players: "74,000+" },
+    { id: 4924922222, name: "Brookhaven 🏡RP",    players: "61,000+" },
+    { id: 3260590327, name: "Murder Mystery 2",   players: "38,000+" },
+  ];
+
+  async function loadThumbnails() {
+    const grid = document.getElementById('gamesGrid');
+    const ids = GAMES.map(g => g.id).join(',');
+
+    try {
+      const res = await fetch(
+        `https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=${ids}&countPerUniverse=1&startIndex=0&size=768x432&format=Png&isCircular=false`
+      );
+      const data = await res.json();
+
+      const thumbMap = {};
+      data.data.forEach(entry => {
+        if (entry.thumbnails && entry.thumbnails[0]) {
+          thumbMap[entry.universeId] = entry.thumbnails[0].imageUrl;
+        }
+      });
+
+      GAMES.forEach(game => {
+        const imgUrl = thumbMap[game.id];
+        const card = document.createElement('div');
+        card.className = 'game-card';
+        card.onclick = showWarning;
+        card.innerHTML = `
+          <div class="promo-badge">🎁 キャンペーン対象</div>
+          ${imgUrl
+            ? `<img class="thumb" src="${imgUrl}" alt="${game.name}" loading="lazy">`
+            : `<div class="thumb-placeholder">🎮</div>`}
+          <div class="info">
+            <div class="game-name">${game.name}</div>
+            <div class="players">👥 同時接続 ${game.players}</div>
+          </div>`;
+        grid.appendChild(card);
+      });
+    } catch {
+      // API 失敗時はプレースホルダーで表示
+      GAMES.forEach(game => {
+        const card = document.createElement('div');
+        card.className = 'game-card';
+        card.onclick = showWarning;
+        card.innerHTML = `
+          <div class="promo-badge">🎁 キャンペーン対象</div>
+          <div class="thumb-placeholder">🎮</div>
+          <div class="info">
+            <div class="game-name">${game.name}</div>
+            <div class="players">👥 同時接続 ${game.players}</div>
+          </div>`;
+        grid.appendChild(card);
+      });
+    }
+  }
+
+  loadThumbnails();
+
+  /* ── モーダル ── */
+  function showWarning() {
+    document.getElementById('overlay').classList.add('active');
+  }
+
+  function closeWarning() {
+    document.getElementById('overlay').classList.remove('active');
+  }
+
+  document.getElementById('overlay').addEventListener('click', e => {
+    if (e.target === document.getElementById('overlay')) closeWarning();
+  });
+</script>
+
+</body>
+</html>
